@@ -14,6 +14,8 @@ public class Poque : MonoBehaviour
     [SerializeField]
     protected ETeam m_team;
 
+    public ETeam GetTeam() { return m_team; }
+
     void Start()
     {
         m_initialPosition = transform.position;
