@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TEMP_arrow: {fileID: 4288475362739065646}
+  TEMP_pivot: {fileID: 3925185620374013471}
   launchForceMultiplier: 10
 --- !u!1 &3925185620374013471
 GameObject:

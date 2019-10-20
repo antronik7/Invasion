@@ -5,6 +5,40 @@ using UnityEngine;
 public class Prize : MonoBehaviour
 {
     Vector3 m_initialPosition;
+    bool m_isRoaming = true;
+    [SerializeField]
+    Vector3 m_roamingPosition;
+    [SerializeField]
+    protected float m_speed;
+    [SerializeField]
+    protected float m_roamingRadius;
+
+    private void Update()
+    {
+        WalkTowardRoamingPoint();
+    }
+
+    void WalkTowardRoamingPoint()
+    {
+        if (m_isRoaming)
+        {
+            float step = m_speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, m_roamingPosition, step);
+        }
+        if (Vector3.Distance(transform.position, m_roamingPosition) < 0.05f)
+        {
+            GenerateRoamingPoint();
+        }
+    }
+
+    void GenerateRoamingPoint()
+    {
+        float randomX = Random.Range(-m_roamingRadius, m_roamingRadius);
+        float randomY = Random.Range(-m_roamingRadius, m_roamingRadius);
+        var vec = new Vector2(randomX, randomY);
+
+        m_roamingPosition = vec;
+    }
 
     private void Start()
     {
@@ -14,6 +48,7 @@ public class Prize : MonoBehaviour
     public void GetCaptured()
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        m_isRoaming = false;
     }
 
     public void Free(bool returnToInitialPos)
@@ -23,5 +58,6 @@ public class Prize : MonoBehaviour
             transform.position = m_initialPosition;
         }
         GetComponent<SpriteRenderer>().enabled = true;
+        m_isRoaming = true;
     }
 }
