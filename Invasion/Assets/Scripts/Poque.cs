@@ -83,6 +83,7 @@ public class Poque : MonoBehaviour
     void ReturnSheep()
     {
         m_hasPrize = false;
+        if (m_prizeRef != null)
         m_prizeRef.Free(true);
         m_prizeRef = null;
     }
