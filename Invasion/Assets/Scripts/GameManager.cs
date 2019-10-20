@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        StartTurn();
+    }
+
     void StartTurn()
     {
         m_turnIndex++;
@@ -55,17 +60,5 @@ public class GameManager : MonoBehaviour
             m_redScore++;
         }
         m_scorePanel.Instantiate(m_greenScore, m_redScore);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

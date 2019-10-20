@@ -4,18 +4,35 @@ using UnityEngine;
 
 public class GameplayController : MonoBehaviour
 {
-    public CharacterController TEMP_characterController;
 
-    public float pullMinThreshold = 0.1f;
-    public float pullMaxThreshold = 1f;
+    public static GameplayController m_instance;
+
+    void Awake()
+    {
+        if (m_instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            m_instance = this;
+        }
+    }
+
+    [SerializeField]
+    private CharacterController m_characterController;
+
+    [SerializeField]
+    private float pullMinThreshold = 0.1f;
+    [SerializeField]
+    private float pullMaxThreshold = 1f;
 
     private Vector3 aimRootPosition;
     private bool isAiming = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public void AssignCharacterController(CharacterController controller)
     {
-        
+        m_characterController = controller;
     }
 
     // Update is called once per frame
@@ -27,8 +44,11 @@ public class GameplayController : MonoBehaviour
 
         //Debug.Log(magnitude);
 
-        TEMP_characterController.UpdateForceMagnitude(magnitude);
-        TEMP_characterController.UpdateLaunchDirection(direction * -1f);
+        if (m_characterController != null)
+        {
+            m_characterController.UpdateForceMagnitude(magnitude);
+            m_characterController.UpdateLaunchDirection(direction * -1f);
+        }
 
         ManageInput();
     }
@@ -44,7 +64,8 @@ public class GameplayController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isAiming = false;
-            TEMP_characterController.LaunchCharacter();
+            if (m_characterController != null)
+                m_characterController.LaunchCharacter();
         }
     }
 

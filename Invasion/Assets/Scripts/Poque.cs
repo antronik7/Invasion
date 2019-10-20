@@ -84,7 +84,7 @@ public class Poque : MonoBehaviour
     {
         m_hasPrize = false;
         if (m_prizeRef != null)
-        m_prizeRef.Free(true);
+            m_prizeRef.Free(true);
         m_prizeRef = null;
     }
 
