@@ -6,10 +6,13 @@ public class Poque : MonoBehaviour
 {
     [SerializeField]
     protected float m_speedMin;
-    protected bool m_hasSheep;
+    protected bool m_hasPrize;
     [SerializeField]
     protected SpriteRenderer m_sheepSprite;
     protected Vector3 m_initialPosition;
+    protected Prize m_prizeRef;
+    [SerializeField]
+    protected ETeam m_team;
 
     void Start()
     {
@@ -22,7 +25,7 @@ public class Poque : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
-        m_sheepSprite.gameObject.SetActive(m_hasSheep);
+        m_sheepSprite.gameObject.SetActive(m_hasPrize);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +36,21 @@ public class Poque : MonoBehaviour
         {
             CapturePrize(collision.gameObject.GetComponent<Prize>());
         }
+
+        var touchdownZone = collision.GetComponent<TouchdownZone>();
+
+        if (touchdownZone != null)
+        {
+            if (m_hasPrize && touchdownZone.IsSameTeam(m_team))
+            {
+                Touchdown();
+            }
+        }
+    }
+
+    void Touchdown()
+    {
+        GameManager.m_instance.Touchdown(m_team);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -46,20 +64,31 @@ public class Poque : MonoBehaviour
 
     void Die()
     {
-        Respawn(3);
+        var respawn = Respawn(3);
+        StartCoroutine(respawn);
     }
     
     IEnumerator Respawn(float time)
     {
-        gameObject.SetActive(false);
+        Debug.Log("Respawning");
+        ReturnSheep();
+        GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(time);
         transform.position = m_initialPosition;
-        gameObject.SetActive(true);
+        GetComponent<SpriteRenderer>().enabled = true;
+    }
+
+    void ReturnSheep()
+    {
+        m_hasPrize = false;
+        m_prizeRef.Free(true);
+        m_prizeRef = null;
     }
 
     void CapturePrize(Prize prize)
     {
-        m_hasSheep = true;
+        m_hasPrize = true;
+        m_prizeRef = prize;
         prize.GetCaptured();
     }
 }
