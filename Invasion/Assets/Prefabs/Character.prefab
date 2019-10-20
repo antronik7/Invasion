@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3212277912806272788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TEMP_arrow: {fileID: 4288475362739065646}
   TEMP_pivot: {fileID: 3925185620374013471}
-  launchForceMultiplier: 100
+  launchForceMultiplier: 500
 --- !u!114 &850132294157152989
 MonoBehaviour:
   m_ObjectHideFlags: 0
