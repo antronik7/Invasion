@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool m_isTurn;
+    private Poque m_selectedPoque;
 
-    // Update is called once per frame
-    void Update()
+    public void StartTurn()
     {
-        
+        if (m_isTurn)
+        {
+            if (m_selectedPoque != null)
+            {
+                //Poque 
+            }
+        }
     }
 }

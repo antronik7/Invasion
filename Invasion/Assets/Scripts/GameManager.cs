@@ -7,6 +7,12 @@ public class GameManager : MonoBehaviour
     public static GameManager m_instance;
     [SerializeField]
     private ScorePanel m_scorePanel;
+    [SerializeField]
+    private int m_turnIndex;
+    [SerializeField]
+    private Player m_player1;
+    [SerializeField]
+    private Player m_player2;
 
     void Awake()
     {
@@ -18,6 +24,20 @@ public class GameManager : MonoBehaviour
         {
             m_instance = this;
         }
+    }
+
+    void StartTurn()
+    {
+        m_turnIndex++;
+        if (m_turnIndex % 2 == 1)
+        {
+            m_player1.StartTurn();
+        }
+    }
+
+    public void EndTurn()
+    {
+
     }
 
     protected int m_redScore;
