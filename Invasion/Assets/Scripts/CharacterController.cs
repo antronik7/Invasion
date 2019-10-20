@@ -19,12 +19,6 @@ public class CharacterController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -41,12 +35,14 @@ public class CharacterController : MonoBehaviour
         launchDirection = value;
     }
 
-    public void LaunchCharacter()
+    public bool LaunchCharacter()
     {
         if (forceMagnitude <= 0f)
-            return;
+            return false;
 
         rigidBody.AddForce(launchDirection * forceMagnitude * launchForceMultiplier);
+        GetComponent<Poque>().Launch();
+        return true;
     }
 
     private void UpdateArrow()

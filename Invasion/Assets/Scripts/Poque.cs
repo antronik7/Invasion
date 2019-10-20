@@ -13,6 +13,7 @@ public class Poque : MonoBehaviour
     protected Prize m_prizeRef;
     [SerializeField]
     protected ETeam m_team;
+    protected bool m_launched;
 
     public ETeam GetTeam() { return m_team; }
 
@@ -23,11 +24,23 @@ public class Poque : MonoBehaviour
 
     void Update()
     {
-        if (GetComponent<Rigidbody2D>().velocity.magnitude < m_speedMin)
+        if (m_launched && GetComponent<Rigidbody2D>().velocity.magnitude < m_speedMin)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            OnStopMovement();
         }
         m_sheepSprite.gameObject.SetActive(m_hasPrize);
+    }
+
+    public void Launch()
+    {
+        m_launched = true;
+    }
+
+    void OnStopMovement()
+    {
+        m_launched = false;
+        GameplayController.m_instance.OnMovementPhaseEnded();
     }
 
     void OnTriggerEnter2D(Collider2D collision)

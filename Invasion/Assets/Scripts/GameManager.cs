@@ -31,18 +31,21 @@ public class GameManager : MonoBehaviour
         StartTurn();
     }
 
-    void StartTurn()
+    public void StartTurn()
     {
+        Debug.Log("Start turn #" + m_turnIndex);
         m_turnIndex++;
+        GameplayController.m_instance.AssignCharacterController(null);
         if (m_turnIndex % 2 == 1)
         {
+            m_player2.EndTurn();
             m_player1.StartTurn();
         }
-    }
-
-    public void EndTurn()
-    {
-
+        else
+        {
+            m_player1.EndTurn();
+            m_player2.StartTurn();
+        }
     }
 
     protected int m_redScore;

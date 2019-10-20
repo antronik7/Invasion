@@ -283,6 +283,11 @@ PrefabInstance:
       propertyPath: TEMP_characterController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 126955370943519951, guid: 21ff6fc757c841f4b9983e8f56c9f35c,
+        type: 3}
+      propertyPath: pullMinThreshold
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ff6fc757c841f4b9983e8f56c9f35c, type: 3}
 --- !u!1 &285685930
@@ -1557,7 +1562,7 @@ PrefabInstance:
     - target: {fileID: 1407534448472804626, guid: 227b64ce79624ce4680792bb88b3cba9,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1027655772, guid: 227b64ce79624ce4680792bb88b3cba9, type: 3}
       propertyPath: m_UseFullKinematicContacts
@@ -1806,7 +1811,7 @@ PrefabInstance:
     - target: {fileID: 1407534448472804626, guid: 227b64ce79624ce4680792bb88b3cba9,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1027655772, guid: 227b64ce79624ce4680792bb88b3cba9, type: 3}
       propertyPath: m_UseFullKinematicContacts

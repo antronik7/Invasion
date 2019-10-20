@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameplayController : MonoBehaviour
 {
-
     public static GameplayController m_instance;
+    private bool m_isLaunched;
 
     void Awake()
     {
@@ -33,6 +33,7 @@ public class GameplayController : MonoBehaviour
     public void AssignCharacterController(CharacterController controller)
     {
         m_characterController = controller;
+        m_isLaunched = false;
     }
 
     // Update is called once per frame
@@ -50,7 +51,10 @@ public class GameplayController : MonoBehaviour
             m_characterController.UpdateLaunchDirection(direction * -1f);
         }
 
-        ManageInput();
+        if (!m_isLaunched)
+        {
+            ManageInput();
+        }
     }
 
     private void ManageInput()
@@ -65,7 +69,12 @@ public class GameplayController : MonoBehaviour
         {
             isAiming = false;
             if (m_characterController != null)
-                m_characterController.LaunchCharacter();
+            {
+                if(m_characterController.LaunchCharacter())
+                {
+                    m_isLaunched = true;
+                }
+            }
         }
     }
 
@@ -82,5 +91,10 @@ public class GameplayController : MonoBehaviour
     private Vector3 CalculateDirection()
     {
         return (Camera.main.ScreenToWorldPoint(Input.mousePosition) - aimRootPosition).normalized;
+    }
+
+    public void OnMovementPhaseEnded()
+    {
+        GameManager.m_instance.StartTurn();
     }
 }

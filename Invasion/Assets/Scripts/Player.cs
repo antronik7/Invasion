@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    var hits = Physics2D.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward);
+                    var hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.up);
                     if (hits.Length != 0)
                     {
                         foreach (var hit in hits)
@@ -37,16 +37,19 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-
-            }
         }
     }
 
     public void StartTurn()
     {
         m_isTurn = true;
+        m_selectedPoque = null;
+    }
+
+    public void EndTurn()
+    {
+        m_isTurn = false;
+        m_selectedPoque = null;
     }
 
     void TrySelectPoque(Poque poque)
