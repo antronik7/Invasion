@@ -172,6 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_text: {fileID: 13396179}
+  m_redColor: {r: 0.7924528, g: 0, b: 0, a: 1}
+  m_greenColor: {r: 0.012904947, g: 0.5471698, b: 0.122716315, a: 1}
 --- !u!114 &8878204
 MonoBehaviour:
   m_ObjectHideFlags: 0
