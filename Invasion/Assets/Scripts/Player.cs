@@ -15,23 +15,20 @@ public class Player : MonoBehaviour
     {
         if (m_isTurn)
         {
-            if (m_selectedPoque == null)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButtonDown(0))
+                var hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.up);
+                if (hits.Length != 0)
                 {
-                    var hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.up);
-                    if (hits.Length != 0)
+                    foreach (var hit in hits)
                     {
-                        foreach (var hit in hits)
+                        if (hit.collider != null)
                         {
-                            if (hit.collider != null)
+                            Debug.Log(hit.transform.gameObject.name);
+                            var poque = hit.transform.gameObject.GetComponent<Poque>();
+                            if (poque != null)
                             {
-                                Debug.Log(hit.transform.gameObject.name);
-                                var poque = hit.transform.gameObject.GetComponent<Poque>();
-                                if (poque != null)
-                                {
-                                    TrySelectPoque(poque);
-                                }
+                                TrySelectPoque(poque);
                             }
                         }
                     }
@@ -54,7 +51,7 @@ public class Player : MonoBehaviour
 
     void TrySelectPoque(Poque poque)
     {
-        if (m_selectedPoque == null && m_isTurn && poque.GetTeam() == m_team)
+        if (m_isTurn && poque.GetTeam() == m_team)
         {
             m_selectedPoque = poque;
             GameplayController.m_instance.AssignCharacterController(poque.GetComponent<CharacterController>());
