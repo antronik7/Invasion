@@ -43,13 +43,15 @@ public class GameManager : MonoBehaviour
         {
             m_player2.EndTurn();
             m_player1.StartTurn();
+            if (m_bluePlayerTurnPanel != null)
             m_bluePlayerTurnPanel.SetTrigger("SlideFromLeft");
         }
         else
         {
             m_player1.EndTurn();
             m_player2.StartTurn();
-            m_redPlayerTurnPanel.SetTrigger("SlideFromRight");
+            if (m_redPlayerTurnPanel != null)
+                m_redPlayerTurnPanel.SetTrigger("SlideFromRight");
         }
     }
 

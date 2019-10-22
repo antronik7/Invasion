@@ -7490,6 +7490,14 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 4ce3260e0a63bba48bf2d5c48bc7c807, type: 2}
+    - target: {fileID: 1027655772, guid: 227b64ce79624ce4680792bb88b3cba9, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027655772, guid: 227b64ce79624ce4680792bb88b3cba9, type: 3}
+      propertyPath: m_Mass
+      value: 0.7853982
+      objectReference: {fileID: 0}
     - target: {fileID: 3212277912806272788, guid: 227b64ce79624ce4680792bb88b3cba9,
         type: 3}
       propertyPath: launchForceMultiplier
@@ -7701,6 +7709,14 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 4ce3260e0a63bba48bf2d5c48bc7c807, type: 2}
+    - target: {fileID: 1027655772, guid: 227b64ce79624ce4680792bb88b3cba9, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027655772, guid: 227b64ce79624ce4680792bb88b3cba9, type: 3}
+      propertyPath: m_Mass
+      value: 0.7853982
+      objectReference: {fileID: 0}
     - target: {fileID: 3212277912806272788, guid: 227b64ce79624ce4680792bb88b3cba9,
         type: 3}
       propertyPath: launchForceMultiplier

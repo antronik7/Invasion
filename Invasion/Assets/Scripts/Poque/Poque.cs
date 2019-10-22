@@ -96,7 +96,7 @@ public class Poque : MonoBehaviour
         var respawn = Respawn(3);
         StartCoroutine(respawn);
     }
-    
+
     IEnumerator Respawn(float time)
     {
         Debug.Log("Respawning");
@@ -120,5 +120,59 @@ public class Poque : MonoBehaviour
         m_hasPrize = true;
         m_prizeRef = prize;
         prize.GetCaptured();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var otherPoque = collision.collider.GetComponent<Poque>();
+        if (otherPoque != null && m_launched)
+        {
+            ExecuteOnCollisionAbility(m_characterData.m_class, otherPoque);
+        }
+    }
+
+    void ExecuteOnCollisionAbility(EClass poqueClasse, Poque otherPoque)
+    {
+        switch (poqueClasse)
+        {
+            case EClass.Archer:
+                break;
+            case EClass.Assassin:
+                break;
+            case EClass.Beefy:
+                break;
+            case EClass.DoubleDash:
+                break;
+            case EClass.Duplicating:
+                break;
+            case EClass.Fast:
+                break;
+            case EClass.Flipper:
+                Flip(otherPoque);
+                break;
+            case EClass.Ghost:
+                break;
+            case EClass.Kamikaze:
+                break;
+            case EClass.Regular:
+                break;
+            case EClass.ShieldGuy:
+                break;
+            case EClass.Teleporter:
+                break;
+            case EClass.Valkyrie:
+                break;
+            case EClass.WindSupport:
+                break;
+
+        }
+    }
+
+    void Flip(Poque otherPoque)
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        otherPoque.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        var distance = transform.position - otherPoque.transform.position;
+        otherPoque.transform.position = transform.position + distance;
     }
 }
