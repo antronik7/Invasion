@@ -65,7 +65,6 @@ public class GameplayController : MonoBehaviour
             isAiming = true;
             aimRootPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-
         if (Input.GetMouseButtonUp(0))
         {
             isAiming = false;

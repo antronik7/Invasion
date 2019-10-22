@@ -14,12 +14,22 @@ public class Poque : MonoBehaviour
     [SerializeField]
     protected ETeam m_team;
     protected bool m_launched;
+    [SerializeField]
+    protected CharacterData m_characterData;
 
     public ETeam GetTeam() { return m_team; }
 
     void Start()
     {
         m_initialPosition = transform.position;
+        if (m_characterData != null)
+        {
+            m_speedMin = m_characterData.m_speedMin;
+            if (m_team == ETeam.Green)
+                GetComponent<SpriteRenderer>().sprite = m_characterData.m_spriteGreen;
+            else
+                GetComponent<SpriteRenderer>().sprite = m_characterData.m_spriteRed;
+        }
     }
 
     void Update()
