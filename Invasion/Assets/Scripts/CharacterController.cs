@@ -47,7 +47,7 @@ public class CharacterController : MonoBehaviour
 
     private void UpdateArrow()
     {
-        if(forceMagnitude != 0)
+        if(forceMagnitude >= GameplayController.m_instance.GetPullMinThreshold())
         {
             UpdateArrowScale();
             UpdateArrowRotation();

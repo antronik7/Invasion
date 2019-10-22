@@ -24,6 +24,7 @@ public class GameplayController : MonoBehaviour
 
     [SerializeField]
     private float pullMinThreshold = 0.1f;
+    public float GetPullMinThreshold() { return pullMinThreshold; }
     [SerializeField]
     private float pullMaxThreshold = 1f;
 
