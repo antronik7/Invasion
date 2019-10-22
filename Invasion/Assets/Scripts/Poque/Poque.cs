@@ -61,7 +61,7 @@ public class Poque : MonoBehaviour
     {
         var prize = collision.gameObject.GetComponent<Prize>();
 
-        if (prize != null)
+        if (prize != null && !prize.m_isCaptured)
         {
             CapturePrize(collision.gameObject.GetComponent<Prize>());
         }

@@ -12,6 +12,7 @@ public class Prize : MonoBehaviour
     protected float m_speed;
     [SerializeField]
     protected float m_roamingRadius;
+    public bool m_isCaptured;
 
     private void Update()
     {
@@ -49,6 +50,7 @@ public class Prize : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().enabled = false;
         m_isRoaming = false;
+        m_isCaptured = true;
     }
 
     public void Free(bool returnToInitialPos)
@@ -59,5 +61,6 @@ public class Prize : MonoBehaviour
         }
         GetComponent<SpriteRenderer>().enabled = true;
         m_isRoaming = true;
+        m_isCaptured = false;
     }
 }

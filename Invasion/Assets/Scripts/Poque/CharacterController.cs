@@ -27,7 +27,10 @@ public class CharacterController : MonoBehaviour
 
     public void UpdateForceMagnitude(float value)
     {
-        forceMagnitude = value;
+        if (value > GameplayController.m_instance.GetPullMinThreshold())
+            forceMagnitude = value;
+        else
+            forceMagnitude = 0;
     }
 
     public void UpdateLaunchDirection(Vector3 value)
@@ -42,6 +45,7 @@ public class CharacterController : MonoBehaviour
 
         rigidBody.AddForce(launchDirection * forceMagnitude * launchForceMultiplier);
         GetComponent<Poque>().Launch();
+        forceMagnitude = 0;
         return true;
     }
 
