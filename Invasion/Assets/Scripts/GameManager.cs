@@ -17,6 +17,15 @@ public class GameManager : MonoBehaviour
     private Player m_player1;
     [SerializeField]
     private Player m_player2;
+    private List<Poque> m_movingPoques = new List<Poque>();
+
+    [SerializeField]
+    private float m_nextTurnIdleTimer;
+    private float m_currentIdleTimer;
+    private bool m_currentlyIdle;
+
+    protected int m_redScore;
+    protected int m_greenScore;
 
     void Awake()
     {
@@ -35,10 +44,40 @@ public class GameManager : MonoBehaviour
         StartTurn();
     }
 
+    private void Update()
+    {
+        m_currentlyIdle = true;
+        if (!GameplayController.m_instance.m_isLaunched)
+            return;
+
+        var poques = m_player1.GetPoques();
+        poques.AddRange(m_player2.GetPoques());
+        foreach (var poque in poques)
+        {
+            if (poque.GetComponent<Rigidbody2D>().velocity.magnitude >= 0.05)
+            {
+                m_currentlyIdle = false;
+            }
+        }
+        if (m_currentlyIdle)
+        {
+            m_currentIdleTimer += Time.deltaTime;
+            if (m_currentIdleTimer > m_nextTurnIdleTimer)
+            {
+                StartTurn();
+                m_currentIdleTimer = 0;
+            }
+        }
+        else
+        {
+            m_currentIdleTimer = 0;
+        }
+    }
+
     public void StartTurn()
     {
         m_turnIndex++;
-        GameplayController.m_instance.AssignCharacterController(null);
+        GameplayController.m_instance.StartTurn();
         if (m_turnIndex % 2 == 1)
         {
             m_player2.EndTurn();
@@ -54,10 +93,6 @@ public class GameManager : MonoBehaviour
                 m_redPlayerTurnPanel.SetTrigger("SlideFromRight");
         }
     }
-
-    protected int m_redScore;
-    [SerializeField]
-    protected int m_greenScore;
 
     public void Touchdown(ETeam team)
     {

@@ -54,7 +54,6 @@ public class Poque : MonoBehaviour
     void OnStopMovement()
     {
         m_launched = false;
-        GameplayController.m_instance.OnMovementPhaseEnded();
     }
 
     void OnTriggerEnter2D(Collider2D collision)

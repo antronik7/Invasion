@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameplayController : MonoBehaviour
 {
     public static GameplayController m_instance;
-    private bool m_isLaunched;
+    [SerializeField]
+    public bool m_isLaunched;
 
     void Awake()
     {
@@ -34,7 +35,12 @@ public class GameplayController : MonoBehaviour
     public void AssignCharacterController(CharacterController controller)
     {
         m_characterController = controller;
+    }
+
+    public void StartTurn()
+    {
         m_isLaunched = false;
+        AssignCharacterController(null);
     }
 
     // Update is called once per frame
@@ -65,7 +71,7 @@ public class GameplayController : MonoBehaviour
             isAiming = true;
             aimRootPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !m_isLaunched)
         {
             isAiming = false;
             if (m_characterController != null)
@@ -91,10 +97,5 @@ public class GameplayController : MonoBehaviour
     private Vector3 CalculateDirection()
     {
         return (Camera.main.ScreenToWorldPoint(Input.mousePosition) - aimRootPosition).normalized;
-    }
-
-    public void OnMovementPhaseEnded()
-    {
-        GameManager.m_instance.StartTurn();
     }
 }

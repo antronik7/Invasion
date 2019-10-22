@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     private Poque m_selectedPoque;
     [SerializeField]
     private ETeam m_team;
+    [SerializeField]
+    private List<Poque> m_poques = new List<Poque>();
+    public List<Poque> GetPoques() { return m_poques; }
 
     void Update()
     {
