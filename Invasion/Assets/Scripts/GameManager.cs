@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private ScorePanel m_scorePanel;
     [SerializeField]
-    private PlayerTurnPanel m_playerTurnPanel;
+    private Animator m_bluePlayerTurnPanel;
+    [SerializeField]
+    private Animator m_redPlayerTurnPanel;
     [SerializeField]
     private int m_turnIndex;
     [SerializeField]
@@ -41,13 +43,13 @@ public class GameManager : MonoBehaviour
         {
             m_player2.EndTurn();
             m_player1.StartTurn();
-            m_playerTurnPanel.Instantiate(ETeam.Green);
+            m_bluePlayerTurnPanel.SetTrigger("SlideFromLeft");
         }
         else
         {
             m_player1.EndTurn();
             m_player2.StartTurn();
-            m_playerTurnPanel.Instantiate(ETeam.Red);
+            m_redPlayerTurnPanel.SetTrigger("SlideFromRight");
         }
     }
 
