@@ -40,7 +40,7 @@ public class CharacterController : MonoBehaviour
 
     public bool LaunchCharacter()
     {
-        if (forceMagnitude <= 0f)
+        if (forceMagnitude <= GameplayController.m_instance.GetPullMinThreshold())
             return false;
 
         rigidBody.AddForce(launchDirection * forceMagnitude * launchForceMultiplier);
