@@ -16,6 +16,8 @@ public class Poque : MonoBehaviour
     protected bool m_launched;
     [SerializeField]
     protected CharacterData m_characterData;
+    [SerializeField]
+    protected CharacterController m_characterController;
 
     public ETeam GetTeam() { return m_team; }
 
@@ -25,6 +27,8 @@ public class Poque : MonoBehaviour
         if (m_characterData != null)
         {
             m_speedMin = m_characterData.m_speedMin;
+            m_characterController.launchForceMultiplier = m_characterData.m_launchForceMultiplier;
+            GetComponent<Transform>().localScale = new Vector3(m_characterData.m_scale, m_characterData.m_scale, m_characterData.m_scale);
             if (m_team == ETeam.Green)
                 GetComponent<SpriteRenderer>().sprite = m_characterData.m_spriteGreen;
             else

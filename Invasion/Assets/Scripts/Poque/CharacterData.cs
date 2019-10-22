@@ -9,6 +9,8 @@ public class CharacterData : ScriptableObject
     public float m_speedMin;
     public Sprite m_spriteRed;
     public Sprite m_spriteGreen;
+    public float m_launchForceMultiplier;
+    public float m_scale;
 }
 
 public enum EClass

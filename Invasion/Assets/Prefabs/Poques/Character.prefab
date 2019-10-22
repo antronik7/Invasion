@@ -153,6 +153,8 @@ MonoBehaviour:
   m_speedMin: 0.2
   m_sheepSprite: {fileID: 3419534929488197653}
   m_team: 0
+  m_characterData: {fileID: 0}
+  m_characterController: {fileID: 3212277912806272788}
 --- !u!1 &3925185620374013471
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3a3f16c726a7114fa001c03a8c02e6a, type: 3}
-  m_Name: Regular
+  m_Name: Beefy
   m_EditorClassIdentifier: 
-  m_class: 0
+  m_class: 2
   m_speedMin: 0.2
   m_spriteRed: {fileID: 3542127132570728493, guid: 25ac207af7165384d9f9adc4d17cb95d,
     type: 3}
   m_spriteGreen: {fileID: 8248543377919322394, guid: 25ac207af7165384d9f9adc4d17cb95d,
     type: 3}
-  m_launchForceMultiplier: 750
-  m_scale: 1
+  m_launchForceMultiplier: 600
+  m_scale: 1.2
