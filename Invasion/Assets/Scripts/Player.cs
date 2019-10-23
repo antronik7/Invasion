@@ -44,6 +44,10 @@ public class Player : MonoBehaviour
     {
         m_isTurn = true;
         m_selectedPoque = null;
+        foreach (var poque in m_poques)
+        {
+            poque.ResetTurn();
+        }
     }
 
     public void EndTurn()

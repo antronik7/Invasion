@@ -41,7 +41,6 @@ public class Poque : MonoBehaviour
         if (m_launched && GetComponent<Rigidbody2D>().velocity.magnitude < m_speedMin)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            OnStopMovement();
         }
         m_sheepSprite.gameObject.SetActive(m_hasPrize);
     }
@@ -51,7 +50,7 @@ public class Poque : MonoBehaviour
         m_launched = true;
     }
 
-    void OnStopMovement()
+    public void ResetTurn()
     {
         m_launched = false;
     }
