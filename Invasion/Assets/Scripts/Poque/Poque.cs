@@ -125,7 +125,8 @@ public class Poque : MonoBehaviour
         var otherPoque = collision.collider.GetComponent<Poque>();
         if (otherPoque != null && m_launched)
         {
-            ExecuteOnCollisionAbility(m_characterData.m_class, otherPoque);
+            if(m_characterData != null)
+                ExecuteOnCollisionAbility(m_characterData.m_class, otherPoque);
         }
     }
 
