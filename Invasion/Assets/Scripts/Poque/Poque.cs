@@ -40,7 +40,7 @@ public class Poque : MonoBehaviour
 
     void Update()
     {
-        if (m_launched && GetComponent<Rigidbody2D>().velocity.magnitude < m_speedMin)
+        if (GetComponent<Rigidbody2D>().velocity.magnitude < m_speedMin)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
@@ -131,11 +131,14 @@ public class Poque : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var otherPoque = collision.collider.GetComponent<Poque>();
-        if (otherPoque != null && m_launched)
+        if (otherPoque != null)
         {
-            if(m_characterData != null)
+            if (m_launched)
             {
-                ExecuteOnCollisionAbility(m_characterData.m_class, otherPoque);
+                if (m_characterData != null)
+                {
+                    ExecuteOnCollisionAbility(m_characterData.m_class, otherPoque);
+                }
             }
             StartCoroutine(CameraController.m_instance.CameraShake(0.1f));
         }
