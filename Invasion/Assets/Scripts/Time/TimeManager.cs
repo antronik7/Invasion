@@ -30,6 +30,7 @@ public class TimeManager : MonoBehaviour
         {
             m_currentSlowTime += Time.deltaTime;
             Time.timeScale = m_slowAmount.Evaluate(m_currentSlowTime / m_slowDuration);
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
         if (m_currentSlowTime >= m_slowDuration)
         {
