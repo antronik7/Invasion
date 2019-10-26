@@ -18,6 +18,8 @@ public class Poque : MonoBehaviour
     protected CharacterData m_characterData;
     [SerializeField]
     protected CharacterController m_characterController;
+    [SerializeField]
+    protected CollisionSim m_collisionSimulator;
 
     public ETeam GetTeam() { return m_team; }
 
@@ -42,17 +44,23 @@ public class Poque : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
+        if (m_launched)
+        {
+            m_collisionSimulator.UpdatePosition(GetComponent<Rigidbody2D>().velocity);
+        }
         m_sheepSprite.gameObject.SetActive(m_hasPrize);
     }
 
     public void Launch()
     {
         m_launched = true;
+        m_collisionSimulator.gameObject.SetActive(true);
     }
 
     public void ResetTurn()
     {
         m_launched = false;
+        m_collisionSimulator.gameObject.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
