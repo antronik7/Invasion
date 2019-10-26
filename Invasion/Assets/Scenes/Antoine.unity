@@ -6830,10 +6830,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TEMP_character: {fileID: 143588306}
-  followPlayer: 1
+  followPlayer: 0
   followSmoothTime: 0.05
   cameraMinY: 0
   cameraMaxY: 0
+  m_camShakeDuration: 0.1
+  m_camShakeIntensity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0073280334
+      value: 0.9929199
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9975586
+      value: 0.058963776
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1642751185
 GameObject:
   m_ObjectHideFlags: 0
@@ -8958,13 +8983,31 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.01852417
+      value: 0.108795166
       inSlope: 2
       outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 0.44979
+      value: 0.35803026
+      inSlope: 0.20864144
+      outSlope: 0.20864144
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06579642
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5478518
+      value: 0.8857641
+      inSlope: 0.18943447
+      outSlope: 0.18943447
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33019492
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
@@ -8978,6 +9021,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_slowDuration: 1
+  m_camShakeIntensity:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2095062406 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1555607323, guid: 8ac46843f40c10d42b6f527ddd6791d1,
