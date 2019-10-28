@@ -57,7 +57,7 @@ public class Prize : MonoBehaviour
     {
         if (returnToInitialPos)
         {
-            transform.position = m_initialPosition;
+            transform.position = GameManager.m_instance.GetClosestFlagSpawn(transform.position);
         }
         GetComponent<SpriteRenderer>().enabled = true;
         m_isRoaming = true;

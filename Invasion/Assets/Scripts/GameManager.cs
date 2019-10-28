@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Player m_player2;
     private List<Poque> m_movingPoques = new List<Poque>();
+    [SerializeField]
+    private List<Transform> m_flagSpawnPoints;
 
     [SerializeField]
     private float m_nextTurnIdleTimer;
@@ -177,5 +179,30 @@ public class GameManager : MonoBehaviour
             m_redPlayerTurnPanel.GetComponent<Text>().text = "Win";
             m_redPlayerTurnPanel.GetComponent<Text>().color = new Color(255f / 255f, 236f / 255f, 39f / 255f);
         }
+    }
+
+    public Vector3 GetClosestFlagSpawn(Vector3 flagPos)
+    {
+        float closestDistance = -1;
+        int closestIndex = -1;
+        int i = 0;
+        foreach (var trans in m_flagSpawnPoints)
+        {
+            if (closestIndex == -1)
+            {
+                closestDistance = Vector3.Distance(flagPos, trans.position);
+                closestIndex = i;
+            }
+            else
+            {
+                if (closestDistance > Vector3.Distance(flagPos, trans.position))
+                {
+                    closestIndex = i;
+                    closestDistance = Vector3.Distance(flagPos, trans.position);
+                }
+            }
+            i++;
+        }
+        return m_flagSpawnPoints[closestIndex].position;
     }
 }

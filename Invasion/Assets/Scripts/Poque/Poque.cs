@@ -113,6 +113,7 @@ public class Poque : MonoBehaviour
 
     IEnumerator Respawn(float time)
     {
+        yield return new WaitForSeconds(1);
         Debug.Log("Respawning");
         ReturnSheep();
         GetComponent<SpriteRenderer>().enabled = false;
