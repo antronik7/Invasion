@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -204,5 +205,11 @@ public class GameManager : MonoBehaviour
             i++;
         }
         return m_flagSpawnPoints[closestIndex].position;
+    }
+
+    public void ResetGame()
+    {
+        Debug.Log(SceneManager.GetActiveScene());
+        SceneManager.LoadScene("Assets/Scenes/Antoine", LoadSceneMode.Single);
     }
 }
