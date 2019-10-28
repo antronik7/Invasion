@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
         foreach (var poque in m_poques)
         {
             poque.ResetTurn();
+            poque.GetComponent<CharacterController>().ActivateSelectionFeedback(true);
         }
     }
 
@@ -54,6 +55,11 @@ public class Player : MonoBehaviour
     {
         m_isTurn = false;
         m_selectedPoque = null;
+
+        foreach (var poque in m_poques)
+        {
+            poque.GetComponent<CharacterController>().ActivateSelectionFeedback(false);
+        }
     }
 
     void TrySelectPoque(Poque poque)
@@ -62,6 +68,13 @@ public class Player : MonoBehaviour
         {
             m_selectedPoque = poque;
             GameplayController.m_instance.AssignCharacterController(poque.GetComponent<CharacterController>());
+
+            foreach (var otherPoque in m_poques)
+            {
+                otherPoque.GetComponent<CharacterController>().ActivateSelectionFeedback(false);
+            }
+
+            poque.GetComponent<CharacterController>().ActivateSelectedFeedback(true);
         }
     }
 }

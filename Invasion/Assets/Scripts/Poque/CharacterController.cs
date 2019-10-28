@@ -6,6 +6,10 @@ public class CharacterController : MonoBehaviour
 {
     public GameObject TEMP_arrow;
     public GameObject TEMP_pivot;
+    [SerializeField]
+    protected GameObject m_selectionFeedback;
+    [SerializeField]
+    protected GameObject m_selectedFeedback;
 
     public float launchForceMultiplier = 10f;
 
@@ -45,6 +49,7 @@ public class CharacterController : MonoBehaviour
 
         rigidBody.AddForce(launchDirection * forceMagnitude * launchForceMultiplier);
         GetComponent<Poque>().Launch();
+        ActivateSelectedFeedback(false);
         forceMagnitude = 0;
         return true;
     }
@@ -72,5 +77,15 @@ public class CharacterController : MonoBehaviour
     {
         float rotZ = (Mathf.Atan2(launchDirection.y, launchDirection.x) * Mathf.Rad2Deg) - 90f;
         TEMP_pivot.transform.rotation = Quaternion.AngleAxis(rotZ, Vector3.forward);
+    }
+
+    public void ActivateSelectionFeedback(bool value)
+    {
+        m_selectionFeedback.SetActive(value);
+    }
+
+    public void ActivateSelectedFeedback(bool value)
+    {
+        m_selectedFeedback.SetActive(value);
     }
 }
