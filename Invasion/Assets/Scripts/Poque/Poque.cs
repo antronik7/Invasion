@@ -20,6 +20,8 @@ public class Poque : MonoBehaviour
     protected CharacterController m_characterController;
     [SerializeField]
     protected CollisionSim m_collisionSimulator;
+    [SerializeField]
+    protected float m_fallingTime;
 
     public ETeam GetTeam() { return m_team; }
 
@@ -54,13 +56,13 @@ public class Poque : MonoBehaviour
     public void Launch()
     {
         m_launched = true;
-        m_collisionSimulator.gameObject.SetActive(true);
+        m_collisionSimulator.enabled = true;
     }
 
     public void ResetTurn()
     {
         m_launched = false;
-        m_collisionSimulator.gameObject.SetActive(false);
+        m_collisionSimulator.enabled = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -99,8 +101,14 @@ public class Poque : MonoBehaviour
 
     void Die()
     {
-        var respawn = Respawn(3);
-        StartCoroutine(respawn);
+        StartCoroutine(StopAndFall(m_fallingTime));
+    }
+
+    IEnumerator StopAndFall(float time)
+    {
+        yield return new WaitForSeconds(time);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        StartCoroutine(Respawn(3));
     }
 
     IEnumerator Respawn(float time)
