@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float m_ScoreUpdateDelay = 0.5f;
     [SerializeField]
+    private float m_StartGameDelay = 1.0f;
+    [SerializeField]
     private int m_turnIndex;
     [SerializeField]
     private Player m_player1;
