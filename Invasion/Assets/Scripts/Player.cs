@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
 
     public void StartTurn()
     {
-        Debug.Log("StartTurn");
         m_isTurn = true;
         m_selectedPoque = null;
         foreach (var poque in m_poques)
@@ -76,6 +75,14 @@ public class Player : MonoBehaviour
             GameplayController.m_instance.AssignCharacterController(poque.GetComponent<CharacterController>());
 
             m_selectedPoque.GetComponent<CharacterController>().ActivateSelectedFeedback(true);
+        }
+    }
+
+    public void ResetCharactersPosition()
+    {
+        foreach (var poque in m_poques)
+        {
+            poque.ResetPoquePosition();
         }
     }
 }

@@ -80,6 +80,7 @@ public class Poque : MonoBehaviour
         {
             if (m_hasPrize && touchdownZone.IsSameTeam(m_team))
             {
+                Debug.Log("test");
                 Touchdown();
             }
         }
@@ -122,7 +123,7 @@ public class Poque : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    void ReturnSheep()
+    public void ReturnSheep()
     {
         m_hasPrize = false;
         if (m_prizeRef != null)
@@ -196,5 +197,10 @@ public class Poque : MonoBehaviour
         otherPoque.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         var distance = transform.position - otherPoque.transform.position;
         otherPoque.transform.position = transform.position + distance;
+    }
+
+    public void ResetPoquePosition()
+    {
+        transform.position = m_initialPosition;
     }
 }

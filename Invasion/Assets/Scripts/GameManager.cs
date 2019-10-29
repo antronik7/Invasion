@@ -36,10 +36,11 @@ public class GameManager : MonoBehaviour
     private float m_currentIdleTimer;
     private bool m_currentlyIdle;
 
-    public bool m_isGameplayEnable = true;
+    private bool m_isGameplayEnable = true;
+    private bool m_scoredThisTurn = false;
 
-    protected int m_redScore;
     protected int m_greenScore;
+    protected int m_redScore;
 
     void Awake()
     {
@@ -81,6 +82,14 @@ public class GameManager : MonoBehaviour
             m_currentIdleTimer += Time.deltaTime;
             if (m_currentIdleTimer > m_nextTurnIdleTimer)
             {
+                if(m_scoredThisTurn)
+                {
+                    m_scoredThisTurn = false;
+                    GetCurrentPlayer().m_selectedPoque.ReturnSheep();
+                    m_player1.ResetCharactersPosition();
+                    m_player2.ResetCharactersPosition();
+                }
+
                 StartTurn();
                 m_currentIdleTimer = 0;
             }
@@ -113,6 +122,8 @@ public class GameManager : MonoBehaviour
 
     public void Touchdown(ETeam team)
     {
+        m_scoredThisTurn = true;
+
         if (team == ETeam.Green)
         {
             m_greenScore++;

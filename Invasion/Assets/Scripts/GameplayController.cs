@@ -53,8 +53,6 @@ public class GameplayController : MonoBehaviour
         Vector3 direction = CalculateDirection();
         Vector3 inverseDirection = direction * -1f;
 
-        //Debug.Log(magnitude);
-
         if (m_characterController != null)
         {
             m_characterController.UpdateForceMagnitude(magnitude);
@@ -120,9 +118,7 @@ public class GameplayController : MonoBehaviour
         if (!isAiming)
             return 0f;
 
-        Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         float currentMagnitude = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - aimRootPosition).magnitude;
-        Debug.Log(currentMagnitude);
         currentMagnitude = Mathf.Clamp(currentMagnitude - pullMinThreshold, 0f, pullMaxThreshold + pullMinThreshold);
         return currentMagnitude;
     }

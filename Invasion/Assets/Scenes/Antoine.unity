@@ -1247,7 +1247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187238263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.13, z: 0}
+  m_LocalPosition: {x: -2.91, y: 2.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3124,7 +3124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629051061}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 7.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1620297505}
@@ -3143,7 +3143,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.039525986, y: 1.7012501}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3154,7 +3154,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.97003, y: 5.4377327}
+  m_Size: {x: 10, y: 20}
   m_EdgeRadius: 0
 --- !u!114 &629051064
 MonoBehaviour:
@@ -3821,12 +3821,12 @@ PrefabInstance:
     - target: {fileID: 1407534448472804625, guid: 227b64ce79624ce4680792bb88b3cba9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.83
+      value: -3.04
       objectReference: {fileID: 0}
     - target: {fileID: 1407534448472804625, guid: 227b64ce79624ce4680792bb88b3cba9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.28
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 1407534448472804625, guid: 227b64ce79624ce4680792bb88b3cba9,
         type: 3}
@@ -7064,7 +7064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1630486027
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7379,7 +7379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TEMP_character: {fileID: 143588306}
-  followPlayer: 1
+  followPlayer: 0
   followSmoothTime: 0.05
   cameraMinY: 0
   cameraMaxY: 0
@@ -7683,7 +7683,7 @@ PrefabInstance:
     - target: {fileID: 6061766052917546144, guid: 46110cf3a66b2b24594a7ce4d452826f,
         type: 3}
       propertyPath: m_scoreToWin
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6061766052917546144, guid: 46110cf3a66b2b24594a7ce4d452826f,
         type: 3}
