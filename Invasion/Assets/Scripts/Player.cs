@@ -66,15 +66,16 @@ public class Player : MonoBehaviour
     {
         if (m_isTurn && poque.GetTeam() == m_team)
         {
-            m_selectedPoque = poque;
-            GameplayController.m_instance.AssignCharacterController(poque.GetComponent<CharacterController>());
-
             foreach (var otherPoque in m_poques)
             {
                 otherPoque.GetComponent<CharacterController>().ActivateSelectionFeedback(false);
+                otherPoque.GetComponent<CharacterController>().ActivateSelectedFeedback(false);
             }
 
-            poque.GetComponent<CharacterController>().ActivateSelectedFeedback(true);
+            m_selectedPoque = poque;
+            GameplayController.m_instance.AssignCharacterController(poque.GetComponent<CharacterController>());
+
+            m_selectedPoque.GetComponent<CharacterController>().ActivateSelectedFeedback(true);
         }
     }
 }
