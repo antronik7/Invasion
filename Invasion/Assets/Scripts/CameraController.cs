@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour
     public GameObject TEMP_character;
     public bool followPlayer = true;
     public float followSmoothTime = 0.3f;
-
     public float cameraMinY = 1f;
     public float cameraMaxY = 10f;
 
@@ -27,6 +26,17 @@ public class CameraController : MonoBehaviour
             m_instance = this;
         }
     }
+    
+    void Update()
+    {
+
+    }
+
+    private void LateUpdate()
+    {
+        float clampedY = Mathf.Clamp(transform.position.y, cameraMinY, cameraMaxY);
+        transform.position = new Vector3(transform.position.x, clampedY, transform.position.z);
+    }
 
     void FixedUpdate()
     {
@@ -36,11 +46,15 @@ public class CameraController : MonoBehaviour
 
     private void FollowPlayer()
     {
-        float targetY = Mathf.Clamp(TEMP_character.transform.position.y, cameraMinY, cameraMaxY);
+        Poque currentTarget = GameManager.m_instance.GetCurrentPlayer().m_selectedPoque;
+        if (currentTarget != null)
+        {
+            float targetY = currentTarget.transform.position.y;
 
-        Vector3 velocity = Vector3.zero;//FUCK YOU UNITY
-        Vector3 newCameraPosition = new Vector3(transform.position.x, targetY, transform.position.z);
-        transform.position = Vector3.SmoothDamp(transform.position, newCameraPosition, ref velocity, followSmoothTime);
+            Vector3 velocity = Vector3.zero;//FUCK YOU UNITY
+            Vector3 newCameraPosition = new Vector3(transform.position.x, targetY, transform.position.z);
+            transform.position = Vector3.SmoothDamp(transform.position, newCameraPosition, ref velocity, followSmoothTime);
+        }
     }
     
     public IEnumerator CameraShake(float intensity)

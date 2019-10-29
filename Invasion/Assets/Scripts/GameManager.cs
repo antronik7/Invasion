@@ -36,10 +36,10 @@ public class GameManager : MonoBehaviour
     private float m_currentIdleTimer;
     private bool m_currentlyIdle;
 
+    public bool m_isGameplayEnable = true;
+
     protected int m_redScore;
     protected int m_greenScore;
-
-    private bool m_isGameplayStopped = false;
 
     void Awake()
     {
@@ -60,9 +60,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (m_isGameplayStopped)
-            return;
-
         m_currentlyIdle = true;
         if (!GameplayController.m_instance.m_isLaunched)
             return;
@@ -158,7 +155,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        m_isGameplayStopped = true;
+        EnableGameplay(false);
         m_bluePlayerTurnPanel.GetComponent<Animator>().SetTrigger("SlideFromLeft");
         m_redPlayerTurnPanel.GetComponent<Animator>().SetTrigger("SlideFromRight");
 
@@ -211,5 +208,19 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(SceneManager.GetActiveScene());
         SceneManager.LoadScene("Assets/Scenes/Antoine", LoadSceneMode.Single);
+    }
+
+    //This should be change to a solution not based on the turn index...
+    public Player GetCurrentPlayer()
+    {
+        if (m_turnIndex % 2 == 1)
+            return m_player1;
+        else
+            return m_player2;
+    }
+
+    public void EnableGameplay(bool value)
+    {
+        m_isGameplayEnable = value;
     }
 }

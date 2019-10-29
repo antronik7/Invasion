@@ -7379,7 +7379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TEMP_character: {fileID: 143588306}
-  followPlayer: 0
+  followPlayer: 1
   followSmoothTime: 0.05
   cameraMinY: 0
   cameraMaxY: 0
@@ -9282,6 +9282,11 @@ PrefabInstance:
       propertyPath: m_IgnoreReversedGraphics
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4982956853336529979, guid: 8ac46843f40c10d42b6f527ddd6791d1,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ac46843f40c10d42b6f527ddd6791d1, type: 3}
 --- !u!114 &1940615609 stripped
@@ -9947,6 +9952,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407534448472804626, guid: 227b64ce79624ce4680792bb88b3cba9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1027655772, guid: 227b64ce79624ce4680792bb88b3cba9, type: 3}
       propertyPath: m_Material

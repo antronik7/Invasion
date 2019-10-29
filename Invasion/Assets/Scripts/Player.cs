@@ -7,12 +7,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool m_isTurn;
     [SerializeField]
-    private Poque m_selectedPoque;
-    [SerializeField]
     private ETeam m_team;
     [SerializeField]
     private List<Poque> m_poques = new List<Poque>();
     public List<Poque> GetPoques() { return m_poques; }
+
+    public Poque m_selectedPoque;
 
     void Update()
     {
@@ -27,7 +27,6 @@ public class Player : MonoBehaviour
                     {
                         if (hit.collider != null)
                         {
-                            Debug.Log(hit.transform.gameObject.name);
                             var poque = hit.transform.gameObject.GetComponent<Poque>();
                             if (poque != null)
                             {

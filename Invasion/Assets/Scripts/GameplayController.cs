@@ -8,6 +8,9 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     public bool m_isLaunched;
 
+    private bool m_isDraggingCamera = false;
+    private Vector3 m_previousMousePosition;
+
     void Awake()
     {
         if (m_instance != null)
@@ -58,7 +61,11 @@ public class GameplayController : MonoBehaviour
             m_characterController.UpdateLaunchDirection(direction * -1f);
         }
 
-        if (!m_isLaunched)
+        if(GameManager.m_instance.GetCurrentPlayer().m_selectedPoque == null)
+        {
+            DragCamera();
+        }
+        else if (!m_isLaunched)
         {
             ManageInput();
         }
@@ -69,6 +76,7 @@ public class GameplayController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isAiming = true;
+            m_isDraggingCamera = false;
             aimRootPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         if (Input.GetMouseButtonUp(0) && !m_isLaunched)
@@ -81,6 +89,30 @@ public class GameplayController : MonoBehaviour
                     m_isLaunched = true;
                 }
             }
+        }
+    }
+
+    private void DragCamera()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            if (m_isDraggingCamera == false)
+            {
+                Debug.Log("wtf");
+                m_isDraggingCamera = true;
+                m_previousMousePosition = Input.mousePosition;
+            }
+
+            Vector3 currentMousePosition = Input.mousePosition;
+            Vector3 dragDistance = (currentMousePosition - m_previousMousePosition) / 120f;//NEED TO FIND THE CORRECT RATIO...
+            dragDistance = new Vector3(0f, dragDistance.y, 0f);
+            CameraController.m_instance.gameObject.transform.position = CameraController.m_instance.gameObject.transform.position - dragDistance;
+            m_previousMousePosition = currentMousePosition;
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            m_isDraggingCamera = false;
         }
     }
 
