@@ -14,6 +14,7 @@ public class Poque : MonoBehaviour
     [SerializeField]
     protected ETeam m_team;
     protected bool m_launched;
+    public bool GetIsLaunched() { return m_launched; }
     [SerializeField]
     protected CharacterData m_characterData;
     [SerializeField]

@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
 
     void TrySelectPoque(Poque poque)
     {
-        if (m_isTurn && poque.GetTeam() == m_team)
+        if (m_isTurn && poque.GetTeam() == m_team && (m_selectedPoque == null || !m_selectedPoque.GetIsLaunched()))
         {
             foreach (var otherPoque in m_poques)
             {

@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     private Player m_player1;
     [SerializeField]
     private Player m_player2;
-    private List<Poque> m_movingPoques = new List<Poque>();
     [SerializeField]
     private List<Transform> m_flagSpawnPoints;
 
