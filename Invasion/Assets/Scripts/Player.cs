@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
     public void StartTurn()
     {
+        Debug.Log("StartTurn");
         m_isTurn = true;
         m_selectedPoque = null;
         foreach (var poque in m_poques)

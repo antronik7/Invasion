@@ -98,7 +98,6 @@ public class GameplayController : MonoBehaviour
         {
             if (m_isDraggingCamera == false)
             {
-                Debug.Log("wtf");
                 m_isDraggingCamera = true;
                 m_previousMousePosition = Input.mousePosition;
             }
@@ -121,7 +120,9 @@ public class GameplayController : MonoBehaviour
         if (!isAiming)
             return 0f;
 
+        Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         float currentMagnitude = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - aimRootPosition).magnitude;
+        Debug.Log(currentMagnitude);
         currentMagnitude = Mathf.Clamp(currentMagnitude - pullMinThreshold, 0f, pullMaxThreshold + pullMinThreshold);
         return currentMagnitude;
     }

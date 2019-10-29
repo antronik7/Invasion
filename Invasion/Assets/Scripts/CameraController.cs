@@ -54,6 +54,8 @@ public class CameraController : MonoBehaviour
             Vector3 velocity = Vector3.zero;//FUCK YOU UNITY
             Vector3 newCameraPosition = new Vector3(transform.position.x, targetY, transform.position.z);
             transform.position = Vector3.SmoothDamp(transform.position, newCameraPosition, ref velocity, followSmoothTime);
+            float clampedY = Mathf.Clamp(transform.position.y, cameraMinY, cameraMaxY);
+            transform.position = new Vector3(transform.position.x, clampedY, transform.position.z);
         }
     }
     

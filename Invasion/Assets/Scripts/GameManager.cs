@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (m_isGameplayEnable == false)
+            return;
+
         m_currentlyIdle = true;
         if (!GameplayController.m_instance.m_isLaunched)
             return;
