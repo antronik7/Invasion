@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     private Player m_player2;
     [SerializeField]
     private List<Transform> m_flagSpawnPoints;
+    [SerializeField]
+    private Button m_restartBtn;
 
     [SerializeField]
     private float m_nextTurnIdleTimer;
@@ -196,6 +198,7 @@ public class GameManager : MonoBehaviour
             m_redPlayerTurnPanel.GetComponent<Text>().text = "Win";
             m_redPlayerTurnPanel.GetComponent<Text>().color = new Color(255f / 255f, 236f / 255f, 39f / 255f);
         }
+        m_restartBtn.gameObject.SetActive(true);
     }
 
     public Vector3 GetClosestFlagSpawn(Vector3 flagPos)
@@ -225,8 +228,13 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
-        Debug.Log(SceneManager.GetActiveScene());
-        SceneManager.LoadScene("Assets/Scenes/Antoine", LoadSceneMode.Single);
+        StartCoroutine(ReloadScene());
+    }
+
+    IEnumerator ReloadScene()
+    {
+        yield return 1;
+        SceneManager.LoadScene("Antoine", LoadSceneMode.Single);
     }
 
     //This should be change to a solution not based on the turn index...
