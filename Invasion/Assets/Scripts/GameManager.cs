@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     private float m_currentIdleTimer;
     private bool m_currentlyIdle;
 
+    [SerializeField]
     private bool m_isGameplayEnable = true;
     private bool m_scoredThisTurn = false;
 
@@ -57,7 +58,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartTurn();
+        if (m_isGameplayEnable)
+            StartTurn();
     }
 
     private void Update()
@@ -228,13 +230,18 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
-        StartCoroutine(ReloadScene());
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().name));
     }
 
-    IEnumerator ReloadScene()
+    public void LaunchScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+    IEnumerator LoadScene(string sceneName)
     {
         yield return 1;
-        SceneManager.LoadScene("Antoine", LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     //This should be change to a solution not based on the turn index...
@@ -249,5 +256,10 @@ public class GameManager : MonoBehaviour
     public void EnableGameplay(bool value)
     {
         m_isGameplayEnable = value;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
