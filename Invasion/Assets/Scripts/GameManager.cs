@@ -68,7 +68,8 @@ public class GameManager : MonoBehaviour
         if (!GameplayController.m_instance.m_isLaunched)
             return;
 
-        var poques = m_player1.GetPoques();
+        var poques = new List<Poque>();
+        poques.AddRange(m_player1.GetPoques());
         poques.AddRange(m_player2.GetPoques());
         foreach (var poque in poques)
         {
@@ -102,6 +103,7 @@ public class GameManager : MonoBehaviour
 
     public void StartTurn()
     {
+        m_scoredThisTurn = false;
         m_turnIndex++;
         GameplayController.m_instance.StartTurn();
         if (m_turnIndex % 2 == 1)
@@ -122,6 +124,10 @@ public class GameManager : MonoBehaviour
 
     public void Touchdown(ETeam team)
     {
+        if (m_scoredThisTurn)
+        {
+            return;
+        }
         m_scoredThisTurn = true;
 
         if (team == ETeam.Green)
