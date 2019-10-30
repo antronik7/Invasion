@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject m_redPlayerScorePanel;
     [SerializeField]
+    private GameObject m_bluePlayerWinPanel;
+    [SerializeField]
+    private GameObject m_redPlayerWinPanel;
+    [SerializeField]
     private int m_scoreToWin = 3;
     [SerializeField]
     private float m_ScoreUpdateDelay = 0.5f;
@@ -61,7 +65,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         if (m_isGameplayEnable)
-            StartTurn();
+            Invoke("StartTurn", m_StartGameDelay);
     }
 
     private void Update()
@@ -181,26 +185,26 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         EnableGameplay(false);
-        m_bluePlayerTurnPanel.GetComponent<Animator>().SetTrigger("SlideFromLeft");
-        m_redPlayerTurnPanel.GetComponent<Animator>().SetTrigger("SlideFromRight");
+        m_bluePlayerWinPanel.GetComponent<Animator>().SetTrigger("SlideLeft");
+        m_redPlayerWinPanel.GetComponent<Animator>().SetTrigger("SlideRight");
 
         if(m_greenScore > m_redScore)
         {
-            m_bluePlayerTurnPanel.GetComponent<Animator>().SetTrigger("Win");
-            m_bluePlayerTurnPanel.GetComponent<Text>().text = "Win";
-            m_bluePlayerTurnPanel.GetComponent<Text>().color = new Color(255f / 255f, 236f / 255f, 39f / 255f);
-            m_redPlayerTurnPanel.GetComponent<Animator>().SetTrigger("Lose");
-            m_redPlayerTurnPanel.GetComponent<Text>().text = "Lose";
-            m_redPlayerTurnPanel.GetComponent<Text>().color = new Color(194f / 255f, 195f / 255f, 199f / 255f);
+            m_bluePlayerWinPanel.GetComponent<Animator>().SetTrigger("Win");
+            m_bluePlayerWinPanel.GetComponent<Text>().text = "Win";
+            m_bluePlayerWinPanel.GetComponent<Text>().color = new Color(255f / 255f, 236f / 255f, 39f / 255f);
+            m_redPlayerWinPanel.GetComponent<Animator>().SetTrigger("Lose");
+            m_redPlayerWinPanel.GetComponent<Text>().text = "Lose";
+            m_redPlayerWinPanel.GetComponent<Text>().color = new Color(194f / 255f, 195f / 255f, 199f / 255f);
         }
         else
         {
-            m_bluePlayerTurnPanel.GetComponent<Animator>().SetTrigger("Lose");
-            m_bluePlayerTurnPanel.GetComponent<Text>().text = "Lose";
-            m_bluePlayerTurnPanel.GetComponent<Text>().color = new Color(194f / 255f, 195f / 255f, 199f / 255f);
-            m_redPlayerTurnPanel.GetComponent<Animator>().SetTrigger("Win");
-            m_redPlayerTurnPanel.GetComponent<Text>().text = "Win";
-            m_redPlayerTurnPanel.GetComponent<Text>().color = new Color(255f / 255f, 236f / 255f, 39f / 255f);
+            m_bluePlayerWinPanel.GetComponent<Animator>().SetTrigger("Lose");
+            m_bluePlayerWinPanel.GetComponent<Text>().text = "Lose";
+            m_bluePlayerWinPanel.GetComponent<Text>().color = new Color(194f / 255f, 195f / 255f, 199f / 255f);
+            m_redPlayerWinPanel.GetComponent<Animator>().SetTrigger("Win");
+            m_redPlayerWinPanel.GetComponent<Text>().text = "Win";
+            m_redPlayerWinPanel.GetComponent<Text>().color = new Color(255f / 255f, 236f / 255f, 39f / 255f);
         }
         m_restartBtn.gameObject.SetActive(true);
     }
