@@ -46,6 +46,21 @@ public class GameManager : MonoBehaviour
     protected int m_greenScore;
     protected int m_redScore;
 
+    [SerializeField]
+    private Transform m_curtainUpAnchor;
+    [SerializeField]
+    private Transform m_curtainBotAnchor;
+    [SerializeField]
+    private Transform m_curtainLeftAnchor;
+    [SerializeField]
+    private Transform m_curtainRightAnchor;
+    [SerializeField]
+    private GameObject m_curtain;
+    [SerializeField]
+    private Transform m_curtainMidAnchor;
+    [SerializeField]
+    private float m_curtainCallDuration;
+
     void Awake()
     {
         if (m_instance != null)
@@ -60,6 +75,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        CurtainCall(EDirection.Right);
         if (m_isGameplayEnable)
             StartTurn();
     }
@@ -264,4 +280,53 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void CurtainCall(EDirection direction)
+    {
+        switch (direction)
+        {
+            case EDirection.Down:
+                m_curtain.transform.position = m_curtainBotAnchor.position;
+                break;
+            case EDirection.Up:
+                m_curtain.transform.position = m_curtainUpAnchor.position;
+                break;
+            case EDirection.Right:
+                m_curtain.transform.position = m_curtainRightAnchor.position;
+                break;
+            case EDirection.Left:
+                m_curtain.transform.position = m_curtainLeftAnchor.position;
+                break;
+        }
+        StartCoroutine(CurtainCall());
+    }
+
+    IEnumerator CurtainCall()
+    {
+        float curtainCurrentTime = 0;
+        Vector3 curtainMovement = new Vector3();
+        curtainMovement = -m_curtain.transform.position + m_curtainMidAnchor.position;
+        while (curtainCurrentTime < m_curtainCallDuration)
+        {
+            m_curtain.transform.position += (curtainMovement/m_curtainCallDuration) * Time.deltaTime;
+            curtainCurrentTime += Time.deltaTime;
+            yield return null;
+        }
+        curtainCurrentTime = 0;
+        while (curtainCurrentTime < m_curtainCallDuration)
+        {
+            m_curtain.transform.position += (-curtainMovement / m_curtainCallDuration) * Time.deltaTime;
+            curtainCurrentTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+}
+
+public enum EDirection
+{
+    Up,
+    Down,
+    Right,
+    Left
 }
