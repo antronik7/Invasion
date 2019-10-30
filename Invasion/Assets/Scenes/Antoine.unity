@@ -6778,6 +6778,11 @@ PrefabInstance:
       propertyPath: m_restartBtn
       value: 
       objectReference: {fileID: 210332332}
+    - target: {fileID: 6061766052917546144, guid: 46110cf3a66b2b24594a7ce4d452826f,
+        type: 3}
+      propertyPath: m_StartGameDelay
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6061766053514723851, guid: 46110cf3a66b2b24594a7ce4d452826f,
         type: 3}
       propertyPath: m_poques.Array.size
@@ -7732,6 +7737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1630486028, guid: 8ac46843f40c10d42b6f527ddd6791d1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2086483869}
     - target: {fileID: 4982956853336529977, guid: 8ac46843f40c10d42b6f527ddd6791d1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7842,10 +7851,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -400
       objectReference: {fileID: 0}
-    - target: {fileID: 1630486028, guid: 8ac46843f40c10d42b6f527ddd6791d1, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2086483869}
     - target: {fileID: 4427739890609891517, guid: 8ac46843f40c10d42b6f527ddd6791d1,
         type: 3}
       propertyPath: m_EffectDistance.x
@@ -8681,6 +8686,11 @@ PrefabInstance:
     - target: {fileID: 4571375666883420744, guid: 462306f4847968a44a9c77b018ad4455,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002788527606950280, guid: 462306f4847968a44a9c77b018ad4455,
+        type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -83,8 +83,8 @@ public class GameManager : MonoBehaviour
     {
         if (m_isGameplayEnable)
             Invoke("StartTurn", m_StartGameDelay);
-        else
-            CurtainCall(EDirection.Right, true);
+
+        CurtainCall(EDirection.Right, true);
     }
 
     private void Update()
@@ -302,18 +302,19 @@ public class GameManager : MonoBehaviour
         switch (direction)
         {
             case EDirection.Down:
-                m_curtain.transform.Rotate(Vector3.forward, 90);
+                m_curtain.transform.eulerAngles = new Vector3(0f, 0f, 90f);
                 m_curtain.transform.position = m_curtainBotAnchor.position;
                 break;
             case EDirection.Up:
-                m_curtain.transform.Rotate(Vector3.forward, 270);
+                m_curtain.transform.eulerAngles = new Vector3(0f, 0f, 270);
                 m_curtain.transform.position = m_curtainUpAnchor.position;
                 break;
             case EDirection.Right:
-                m_curtain.transform.Rotate(Vector3.forward, 180);
+                m_curtain.transform.eulerAngles = new Vector3(0f, 0f, 180f);
                 m_curtain.transform.position = m_curtainRightAnchor.position;
                 break;
             case EDirection.Left:
+                m_curtain.transform.eulerAngles = new Vector3(0f, 0f, 0f);
                 m_curtain.transform.position = m_curtainLeftAnchor.position;
                 break;
         }
