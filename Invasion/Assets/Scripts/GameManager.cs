@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        CurtainCall(EDirection.Right);
+        CurtainCall(EDirection.Up);
         if (m_isGameplayEnable)
             StartTurn();
     }
@@ -286,12 +286,15 @@ public class GameManager : MonoBehaviour
         switch (direction)
         {
             case EDirection.Down:
+                m_curtain.transform.Rotate(Vector3.fwd, 90);
                 m_curtain.transform.position = m_curtainBotAnchor.position;
                 break;
             case EDirection.Up:
+                m_curtain.transform.Rotate(Vector3.fwd, 270);
                 m_curtain.transform.position = m_curtainUpAnchor.position;
                 break;
             case EDirection.Right:
+                m_curtain.transform.Rotate(Vector3.fwd, 180);
                 m_curtain.transform.position = m_curtainRightAnchor.position;
                 break;
             case EDirection.Left:
