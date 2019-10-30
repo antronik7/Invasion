@@ -63,7 +63,7 @@ public class GameplayController : MonoBehaviour
         {
             DragCamera();
         }
-        else if (!m_isLaunched)
+        if (!m_isLaunched)
         {
             ManageInput();
         }

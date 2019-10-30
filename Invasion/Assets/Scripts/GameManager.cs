@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float m_ScoreUpdateDelay = 0.5f;
     [SerializeField]
+    private float m_StartGameDelay = 1.0f;
+    [SerializeField]
     private int m_turnIndex;
     [SerializeField]
     private Player m_player1;
@@ -29,17 +31,35 @@ public class GameManager : MonoBehaviour
     private Player m_player2;
     [SerializeField]
     private List<Transform> m_flagSpawnPoints;
+    [SerializeField]
+    private Button m_restartBtn;
 
     [SerializeField]
     private float m_nextTurnIdleTimer;
     private float m_currentIdleTimer;
     private bool m_currentlyIdle;
 
+    [SerializeField]
     private bool m_isGameplayEnable = true;
     private bool m_scoredThisTurn = false;
 
     protected int m_greenScore;
     protected int m_redScore;
+
+    [SerializeField]
+    private Transform m_curtainUpAnchor;
+    [SerializeField]
+    private Transform m_curtainBotAnchor;
+    [SerializeField]
+    private Transform m_curtainLeftAnchor;
+    [SerializeField]
+    private Transform m_curtainRightAnchor;
+    [SerializeField]
+    private GameObject m_curtain;
+    [SerializeField]
+    private Transform m_curtainMidAnchor;
+    [SerializeField]
+    private float m_curtainCallDuration;
 
     void Awake()
     {
@@ -55,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartTurn();
+        CurtainCall(EDirection.Left);
     }
 
     private void Update()
@@ -196,6 +216,7 @@ public class GameManager : MonoBehaviour
             m_redPlayerTurnPanel.GetComponent<Text>().text = "Win";
             m_redPlayerTurnPanel.GetComponent<Text>().color = new Color(255f / 255f, 236f / 255f, 39f / 255f);
         }
+        m_restartBtn.gameObject.SetActive(true);
     }
 
     public Vector3 GetClosestFlagSpawn(Vector3 flagPos)
@@ -225,8 +246,18 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
-        Debug.Log(SceneManager.GetActiveScene());
-        SceneManager.LoadScene("Assets/Scenes/Antoine", LoadSceneMode.Single);
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().name));
+    }
+
+    public void LaunchScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+    IEnumerator LoadScene(string sceneName)
+    {
+        yield return 1;
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     //This should be change to a solution not based on the turn index...
@@ -242,4 +273,67 @@ public class GameManager : MonoBehaviour
     {
         m_isGameplayEnable = value;
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void CurtainCall(EDirection direction)
+    {
+        if (m_curtain == null)
+        {
+            return;
+        }
+        switch (direction)
+        {
+            case EDirection.Down:
+                m_curtain.transform.Rotate(Vector3.fwd, 90);
+                m_curtain.transform.position = m_curtainBotAnchor.position;
+                break;
+            case EDirection.Up:
+                m_curtain.transform.Rotate(Vector3.fwd, 270);
+                m_curtain.transform.position = m_curtainUpAnchor.position;
+                break;
+            case EDirection.Right:
+                m_curtain.transform.Rotate(Vector3.fwd, 180);
+                m_curtain.transform.position = m_curtainRightAnchor.position;
+                break;
+            case EDirection.Left:
+                m_curtain.transform.position = m_curtainLeftAnchor.position;
+                break;
+        }
+        StartCoroutine(CurtainCall());
+    }
+
+    IEnumerator CurtainCall()
+    {
+        float curtainCurrentTime = 0;
+        Vector3 curtainMovement = new Vector3();
+        curtainMovement = -m_curtain.transform.position + m_curtainMidAnchor.position;
+        while (curtainCurrentTime < m_curtainCallDuration)
+        {
+            m_curtain.transform.position += (curtainMovement/m_curtainCallDuration) * Time.deltaTime;
+            curtainCurrentTime += Time.deltaTime;
+            yield return null;
+        }
+        curtainCurrentTime = 0;
+        while (curtainCurrentTime < m_curtainCallDuration)
+        {
+            m_curtain.transform.position += (-curtainMovement / m_curtainCallDuration) * Time.deltaTime;
+            curtainCurrentTime += Time.deltaTime;
+            yield return null;
+        }
+        if (m_isGameplayEnable)
+            StartTurn();
+    }
+
+}
+
+public enum EDirection
+{
+    Up,
+    Down,
+    Right,
+    Left
 }
