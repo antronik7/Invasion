@@ -75,9 +75,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        CurtainCall(EDirection.Up);
-        if (m_isGameplayEnable)
-            StartTurn();
+        CurtainCall(EDirection.Left);
     }
 
     private void Update()
@@ -283,6 +281,10 @@ public class GameManager : MonoBehaviour
 
     public void CurtainCall(EDirection direction)
     {
+        if (m_curtain == null)
+        {
+            return;
+        }
         switch (direction)
         {
             case EDirection.Down:
@@ -322,6 +324,8 @@ public class GameManager : MonoBehaviour
             curtainCurrentTime += Time.deltaTime;
             yield return null;
         }
+        if (m_isGameplayEnable)
+            StartTurn();
     }
 
 }
