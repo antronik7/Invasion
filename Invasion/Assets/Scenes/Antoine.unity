@@ -7742,7 +7742,7 @@ PrefabInstance:
     - target: {fileID: 6061766052917546144, guid: 46110cf3a66b2b24594a7ce4d452826f,
         type: 3}
       propertyPath: m_curtainCallDuration
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6061766053514723851, guid: 46110cf3a66b2b24594a7ce4d452826f,
         type: 3}
