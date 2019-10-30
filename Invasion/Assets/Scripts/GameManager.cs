@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float m_StartGameDelay = 1.0f;
     [SerializeField]
+    private float m_LoadSceneDelay = 1.0f;
+    [SerializeField]
     private int m_turnIndex;
     [SerializeField]
     private Player m_player1;
@@ -50,6 +52,21 @@ public class GameManager : MonoBehaviour
     protected int m_greenScore;
     protected int m_redScore;
 
+    [SerializeField]
+    private Transform m_curtainUpAnchor;
+    [SerializeField]
+    private Transform m_curtainBotAnchor;
+    [SerializeField]
+    private Transform m_curtainLeftAnchor;
+    [SerializeField]
+    private Transform m_curtainRightAnchor;
+    [SerializeField]
+    private GameObject m_curtain;
+    [SerializeField]
+    private Transform m_curtainMidAnchor;
+    [SerializeField]
+    private float m_curtainCallDuration;
+
     void Awake()
     {
         if (m_instance != null)
@@ -66,6 +83,8 @@ public class GameManager : MonoBehaviour
     {
         if (m_isGameplayEnable)
             Invoke("StartTurn", m_StartGameDelay);
+        else
+            CurtainCall(EDirection.Right, true);
     }
 
     private void Update()
@@ -238,15 +257,21 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().name));
     }
+    
+    public void ChangeScene(string sceneName)
+    {
+        StartCoroutine(LoadScene(sceneName));
+    }
 
-    public void LaunchScene(string sceneName)
+    private void LaunchScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     IEnumerator LoadScene(string sceneName)
     {
-        yield return 1;
+        CurtainCall(EDirection.Left);
+        yield return new WaitForSeconds(m_LoadSceneDelay);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
@@ -267,5 +292,59 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void CurtainCall(EDirection direction, bool startFromMid = false)
+    {
+        if (m_curtain == null)
+            return;
+
+        switch (direction)
+        {
+            case EDirection.Down:
+                m_curtain.transform.Rotate(Vector3.forward, 90);
+                m_curtain.transform.position = m_curtainBotAnchor.position;
+                break;
+            case EDirection.Up:
+                m_curtain.transform.Rotate(Vector3.forward, 270);
+                m_curtain.transform.position = m_curtainUpAnchor.position;
+                break;
+            case EDirection.Right:
+                m_curtain.transform.Rotate(Vector3.forward, 180);
+                m_curtain.transform.position = m_curtainRightAnchor.position;
+                break;
+            case EDirection.Left:
+                m_curtain.transform.position = m_curtainLeftAnchor.position;
+                break;
+        }
+        StartCoroutine(CurtainCall(startFromMid));
+    }
+
+    IEnumerator CurtainCall(bool startFromMid)
+    {
+        Vector3 targetPosition = m_curtainMidAnchor.position;
+        if(startFromMid)
+        {
+            targetPosition = m_curtain.transform.position;
+            m_curtain.transform.position = m_curtainMidAnchor.position;
+        }
+
+        float curtainCurrentTime = 0;
+        Vector3 curtainMovement = new Vector3();
+        curtainMovement = targetPosition - m_curtain.transform.position;
+        while (curtainCurrentTime < m_curtainCallDuration)
+        {
+            m_curtain.transform.position += (curtainMovement / m_curtainCallDuration) * Time.deltaTime;
+            curtainCurrentTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    public enum EDirection
+    {
+        Up,
+        Down,
+        Right,
+        Left
     }
 }

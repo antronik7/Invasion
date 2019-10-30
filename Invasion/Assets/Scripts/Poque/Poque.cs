@@ -110,7 +110,7 @@ public class Poque : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        StartCoroutine(Respawn(3));
+        StartCoroutine(Respawn(0));
     }
 
     IEnumerator Respawn(float time)
