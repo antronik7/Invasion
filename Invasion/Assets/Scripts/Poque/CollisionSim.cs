@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollisionSim : MonoBehaviour
 {
+    [SerializeField]
+    private float m_minimumVelocityForSlowmo;
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!gameObject.activeSelf)
@@ -13,7 +15,11 @@ public class CollisionSim : MonoBehaviour
         var poque = collision.GetComponent<Poque>();
         if (poque != null && poque != GetComponentInParent<Poque>())
         {
-            TimeManager.m_instance.BeginSlow();
+            var rigidbody = GetComponentInParent<Rigidbody2D>();
+            if (rigidbody.velocity.magnitude > m_minimumVelocityForSlowmo)
+            {
+                TimeManager.m_instance.BeginSlow();
+            }
         }
     }
 
