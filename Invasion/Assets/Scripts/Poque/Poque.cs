@@ -23,6 +23,9 @@ public class Poque : MonoBehaviour
     protected CollisionSim m_collisionSimulator;
     [SerializeField]
     protected float m_fallingTime;
+    [SerializeField]
+    protected Collider2D m_centerCollider;
+    private bool m_isDying = false;
 
     public ETeam GetTeam() { return m_team; }
 
@@ -81,8 +84,27 @@ public class Poque : MonoBehaviour
         {
             if (m_hasPrize && touchdownZone.IsSameTeam(m_team))
             {
-                Debug.Log("test");
                 Touchdown();
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.GetComponents<Hole>() != null)
+        {
+            ContactFilter2D filter = new ContactFilter2D();
+            filter.useTriggers = true;
+            List<Collider2D> coll = new List<Collider2D>();
+            if (m_centerCollider.OverlapCollider(filter, coll) > 0)
+            {
+                foreach (var col in coll)
+                {
+                    if (col.GetComponent<Hole>() != null)
+                    {
+                        Die();
+                    }
+                }
             }
         }
     }
@@ -103,13 +125,17 @@ public class Poque : MonoBehaviour
 
     void Die()
     {
-        StartCoroutine(StopAndFall(m_fallingTime));
+        if (!m_isDying)
+        {
+            m_isDying = true;
+            StartCoroutine(StopAndFall(m_fallingTime));
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        }
     }
 
     IEnumerator StopAndFall(float time)
     {
         yield return new WaitForSeconds(time);
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         StartCoroutine(Respawn(0));
     }
 
@@ -122,6 +148,7 @@ public class Poque : MonoBehaviour
         yield return new WaitForSeconds(time);
         transform.position = m_initialPosition;
         GetComponent<SpriteRenderer>().enabled = true;
+        m_isDying = false;
     }
 
     public void ReturnSheep()

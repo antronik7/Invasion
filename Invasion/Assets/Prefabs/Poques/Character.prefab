@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1027655772}
   - component: {fileID: 3212277912806272788}
   - component: {fileID: 850132294157152989}
+  - component: {fileID: 8373153736297861165}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -161,6 +162,24 @@ MonoBehaviour:
   m_characterData: {fileID: 0}
   m_characterController: {fileID: 3212277912806272788}
   m_collisionSimulator: {fileID: 5794787538769531221}
+  m_fallingTime: 0
+  m_centerCollider: {fileID: 8373153736297861165}
+--- !u!58 &8373153736297861165
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407534448472804631}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 4ce3260e0a63bba48bf2d5c48bc7c807, type: 2}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.05
 --- !u!1 &2179003151814353908
 GameObject:
   m_ObjectHideFlags: 0
