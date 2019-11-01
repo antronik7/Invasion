@@ -77,32 +77,43 @@ public class Poque : MonoBehaviour
         {
             CapturePrize(collision.gameObject.GetComponent<Prize>());
         }
-
-        var touchdownZone = collision.GetComponent<TouchdownZone>();
-
-        if (touchdownZone != null)
-        {
-            if (m_hasPrize && touchdownZone.IsSameTeam(m_team))
-            {
-                Touchdown();
-            }
-        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useTriggers = true;
+
         if (other.GetComponents<Hole>() != null)
         {
-            ContactFilter2D filter = new ContactFilter2D();
-            filter.useTriggers = true;
-            List<Collider2D> coll = new List<Collider2D>();
-            if (m_centerCollider.OverlapCollider(filter, coll) > 0)
+            List<Collider2D> cols = new List<Collider2D>();
+            if (m_centerCollider.OverlapCollider(filter, cols) > 0)
             {
-                foreach (var col in coll)
+                foreach (var col in cols)
                 {
                     if (col.GetComponent<Hole>() != null)
                     {
                         Die();
+                    }
+                }
+            }
+        }
+
+        var touchdownZone = other.GetComponent<TouchdownZone>();
+
+        if (touchdownZone != null)
+        {
+            List<Collider2D> cols = new List<Collider2D>();
+            if (m_centerCollider.OverlapCollider(filter, cols) > 0)
+            {
+                foreach (var col in cols)
+                {
+                    if (col.GetComponent<TouchdownZone>() != null)
+                    {
+                        if (m_hasPrize && touchdownZone.IsSameTeam(m_team))
+                        {
+                            Touchdown();
+                        }
                     }
                 }
             }
