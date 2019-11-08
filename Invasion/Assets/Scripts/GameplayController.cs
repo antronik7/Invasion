@@ -63,7 +63,7 @@ public class GameplayController : MonoBehaviour
         {
             DragCamera();
         }
-        if (!m_isLaunched)
+        else if (!m_isLaunched)//Replace this to a IF to allow draggin imediately after selecting the puck...
         {
             ManageInput();
         }
