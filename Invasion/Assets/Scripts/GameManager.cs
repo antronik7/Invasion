@@ -255,6 +255,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        m_scorePanel.transform.parent.gameObject.SetActive(false);//THIS NEED TO BE CHANGED ASAP!!!
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().name));
     }
     
