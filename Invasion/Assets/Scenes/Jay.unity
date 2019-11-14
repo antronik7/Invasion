@@ -3978,6 +3978,11 @@ PrefabInstance:
       propertyPath: m_fallingTime
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 850132294157152989, guid: 227b64ce79624ce4680792bb88b3cba9,
+        type: 3}
+      propertyPath: m_animator
+      value: 
+      objectReference: {fileID: 1027966863}
     - target: {fileID: 3419534929488197653, guid: 227b64ce79624ce4680792bb88b3cba9,
         type: 3}
       propertyPath: m_Sprite

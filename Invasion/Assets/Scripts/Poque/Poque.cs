@@ -14,6 +14,8 @@ public class Poque : MonoBehaviour
     [SerializeField]
     protected ETeam m_team;
     protected bool m_launched;
+    [SerializeField]
+    protected Animator m_animator;
     public bool GetIsLaunched() { return m_launched; }
     [SerializeField]
     protected CharacterData m_characterData;
@@ -53,6 +55,17 @@ public class Poque : MonoBehaviour
         if (m_launched)
         {
             m_collisionSimulator.UpdatePosition(GetComponent<Rigidbody2D>().velocity);
+            if (m_animator != null)
+            {
+                m_animator.SetFloat("Velocity", Mathf.Clamp(GetComponent<Rigidbody2D>().velocity.magnitude / 5.0f, 0.3f, 0.8f));
+            }
+        }
+        else
+        {
+            if (m_animator != null)
+            {
+                m_animator.SetFloat("Velocity", 0);
+            }
         }
         m_sheepSprite.gameObject.SetActive(m_hasPrize);
     }

@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
 
         foreach (var poque in m_poques)
         {
+            poque.ResetTurn();
             poque.GetComponent<CharacterController>().ActivateSelectionFeedback(false);
         }
     }
