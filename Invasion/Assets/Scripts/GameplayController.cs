@@ -103,7 +103,10 @@ public class GameplayController : MonoBehaviour
             Vector3 currentMousePosition = Input.mousePosition;
             Vector3 dragDistance = (currentMousePosition - m_previousMousePosition) / 120f;//NEED TO FIND THE CORRECT RATIO...
             dragDistance = new Vector3(0f, dragDistance.y, 0f);
-            CameraController.m_instance.gameObject.transform.position = CameraController.m_instance.gameObject.transform.position - dragDistance;
+            if (CameraController.m_instance != null)
+            {
+                CameraController.m_instance.gameObject.transform.position = CameraController.m_instance.gameObject.transform.position - dragDistance;
+            }
             m_previousMousePosition = currentMousePosition;
         }
 
