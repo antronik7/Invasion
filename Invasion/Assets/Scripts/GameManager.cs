@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private ScorePanel m_scorePanel;
     [SerializeField]
+    private ActionCamera m_actionCam;
+    [SerializeField]
+    private Prize m_prize;
+    [SerializeField]
     private GameObject m_bluePlayerTurnPanel;
     [SerializeField]
     private GameObject m_redPlayerTurnPanel;
@@ -134,6 +138,7 @@ public class GameManager : MonoBehaviour
         m_scoredThisTurn = false;
         m_turnIndex++;
         GameplayController.m_instance.StartTurn();
+        Player currentPlayer = m_turnIndex % 2 == 1 ? m_player1 : m_player2;
         if (m_turnIndex % 2 == 1)
         {
             m_player2.EndTurn();
@@ -148,6 +153,29 @@ public class GameManager : MonoBehaviour
             if (m_redPlayerTurnPanel != null)
                 m_redPlayerTurnPanel.GetComponent<Animator>().SetTrigger("SlideFromRight");
         }
+        ChangeTurnCamera(currentPlayer);
+    }
+
+    void ChangeTurnCamera(Player player)
+    {
+        if (m_actionCam != null && m_actionCam.enabled)
+        {
+            List<Transform> transforms = GetActionCamFocusedTransforms(player);
+            m_actionCam.ChangeTurn(transforms);
+        }
+
+    }
+
+    List<Transform> GetActionCamFocusedTransforms(Player player)
+    {
+        List<Transform> transforms = new List<Transform>();
+
+        foreach (var poque in player.GetPoques())
+        {
+            transforms.Add(poque.transform);
+        }
+        transforms.Add(m_prize.transform);
+        return transforms;
     }
 
     public void Touchdown(ETeam team)

@@ -10223,6 +10223,7 @@ MonoBehaviour:
   - {fileID: 1430911073}
   - {fileID: 187238265}
   m_minimumShotSize: 10
+  m_lerpTime: 0.5
 --- !u!1 &1642751185
 GameObject:
   m_ObjectHideFlags: 0
@@ -10825,6 +10826,16 @@ PrefabInstance:
       propertyPath: m_StartGameDelay
       value: 1.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6061766052917546144, guid: 46110cf3a66b2b24594a7ce4d452826f,
+        type: 3}
+      propertyPath: m_actionCam
+      value: 
+      objectReference: {fileID: 1639595246}
+    - target: {fileID: 6061766052917546144, guid: 46110cf3a66b2b24594a7ce4d452826f,
+        type: 3}
+      propertyPath: m_prize
+      value: 
+      objectReference: {fileID: 187238266}
     - target: {fileID: 6061766053514723851, guid: 46110cf3a66b2b24594a7ce4d452826f,
         type: 3}
       propertyPath: m_poques.Array.size
