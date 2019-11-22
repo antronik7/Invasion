@@ -202,7 +202,8 @@ public class Poque : MonoBehaviour
                     ExecuteOnCollisionAbility(m_characterData.m_class, otherPoque);
                 }
             }
-            StartCoroutine(CameraController.m_instance.CameraShake(0.1f));
+            if (CameraController.m_instance != null)
+                StartCoroutine(CameraController.m_instance.CameraShake(0.1f));
         }
     }
 
