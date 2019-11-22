@@ -46,15 +46,17 @@ public class Prize : MonoBehaviour
         m_initialPosition = transform.position;
     }
 
-    public void GetCaptured()
+    public void GetCaptured(Transform trans)
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        transform.SetParent(trans);
         m_isRoaming = false;
         m_isCaptured = true;
     }
 
     public void Free(bool returnToInitialPos)
     {
+        transform.SetParent(null);
         if (returnToInitialPos)
         {
             transform.position = m_initialPosition;

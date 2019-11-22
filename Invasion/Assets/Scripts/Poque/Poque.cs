@@ -187,7 +187,7 @@ public class Poque : MonoBehaviour
     {
         m_hasPrize = true;
         m_prizeRef = prize;
-        prize.GetCaptured();
+        prize.GetCaptured(transform);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
