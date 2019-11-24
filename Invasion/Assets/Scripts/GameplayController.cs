@@ -63,7 +63,7 @@ public class GameplayController : MonoBehaviour
         {
             DragCamera();
         }
-        else if (!m_isLaunched)//Replace this to a IF to allow draggin imediately after selecting the puck...
+        if (!m_isLaunched)
         {
             ManageInput();
         }
@@ -82,7 +82,7 @@ public class GameplayController : MonoBehaviour
             isAiming = false;
             if (m_characterController != null)
             {
-                if(m_characterController.LaunchCharacter())
+                if(m_characterController.TryLaunchCharacter())
                 {
                     m_isLaunched = true;
                 }

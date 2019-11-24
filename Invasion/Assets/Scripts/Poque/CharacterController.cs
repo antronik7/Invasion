@@ -42,11 +42,13 @@ public class CharacterController : MonoBehaviour
         launchDirection = value;
     }
 
-    public bool LaunchCharacter()
+    public bool TryLaunchCharacter()
     {
         if (forceMagnitude <= GameplayController.m_instance.GetPullMinThreshold())
+        {
+            GameManager.m_instance.GetCurrentPlayer().UnselectPoque();
             return false;
-
+        }
         if (!GetComponent<Poque>().CanLaunch())
         {
             return false;

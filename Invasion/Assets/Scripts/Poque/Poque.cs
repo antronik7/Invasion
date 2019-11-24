@@ -28,8 +28,8 @@ public class Poque : MonoBehaviour
     [SerializeField]
     protected Collider2D m_centerCollider;
     private bool m_isDying = false;
+    [SerializeField]
     private int m_launchedThisTurn;
-    private bool m_selectable = true;
 
     public ETeam GetTeam() { return m_team; }
 
@@ -87,14 +87,12 @@ public class Poque : MonoBehaviour
 
     public void ResetLaunch()
     {
-        m_selectable = true;
         m_launched = false;
         m_collisionSimulator.enabled = false;
     }
 
     public void ResetTurn()
     {
-        m_selectable = true;
         m_launchedThisTurn = 0;
         m_launched = false;
         m_collisionSimulator.enabled = false;
