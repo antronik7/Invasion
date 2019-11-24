@@ -40,7 +40,7 @@ public class GameplayController : MonoBehaviour
         m_characterController = controller;
     }
 
-    public void StartTurn()
+    public void Restart()
     {
         m_isLaunched = false;
         AssignCharacterController(null);

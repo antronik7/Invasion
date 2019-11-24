@@ -10836,6 +10836,16 @@ PrefabInstance:
       propertyPath: m_prize
       value: 
       objectReference: {fileID: 187238266}
+    - target: {fileID: 6061766052917546144, guid: 46110cf3a66b2b24594a7ce4d452826f,
+        type: 3}
+      propertyPath: m_maxLaunchAmountPerPoque
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6061766052917546144, guid: 46110cf3a66b2b24594a7ce4d452826f,
+        type: 3}
+      propertyPath: m_maxLaunchesPerTurn
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6061766053514723851, guid: 46110cf3a66b2b24594a7ce4d452826f,
         type: 3}
       propertyPath: m_poques.Array.size

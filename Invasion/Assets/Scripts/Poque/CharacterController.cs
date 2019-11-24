@@ -47,6 +47,11 @@ public class CharacterController : MonoBehaviour
         if (forceMagnitude <= GameplayController.m_instance.GetPullMinThreshold())
             return false;
 
+        if (!GetComponent<Poque>().CanLaunch())
+        {
+            return false;
+        }
+
         rigidBody.AddForce(launchDirection * forceMagnitude * launchForceMultiplier);
         GetComponent<Poque>().Launch();
         ActivateSelectedFeedback(false);

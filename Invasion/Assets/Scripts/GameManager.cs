@@ -71,6 +71,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float m_curtainCallDuration;
 
+    public int LaunchedPoquesThisTurn { get; set; }
+    [SerializeField]
+    private int m_maxLaunchesPerTurn;
+    public int m_maxLaunchAmountPerPoque;
+
     void Awake()
     {
         if (m_instance != null)
@@ -96,9 +101,10 @@ public class GameManager : MonoBehaviour
         if (m_isGameplayEnable == false)
             return;
 
-        m_currentlyIdle = true;
         if (!GameplayController.m_instance.m_isLaunched)
             return;
+
+        m_currentlyIdle = true;
 
         var poques = new List<Poque>();
         poques.AddRange(m_player1.GetPoques());
@@ -115,14 +121,20 @@ public class GameManager : MonoBehaviour
             m_currentIdleTimer += Time.deltaTime;
             if (m_currentIdleTimer > m_nextTurnIdleTimer)
             {
-                if(m_scoredThisTurn)
+                //Player has not launched all of its poques
+                if (!m_scoredThisTurn && !IsTurnChanging())
+                {
+                    m_currentIdleTimer = 0;
+                    SamePlayerLaunch();
+                    return;
+                }
+                if (m_scoredThisTurn)
                 {
                     m_scoredThisTurn = false;
                     GetCurrentPlayer().m_selectedPoque.ReturnSheep();
                     m_player1.ResetCharactersPosition();
                     m_player2.ResetCharactersPosition();
                 }
-
                 StartTurn();
                 m_currentIdleTimer = 0;
             }
@@ -133,11 +145,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private bool IsTurnChanging()
+    {
+        return (LaunchedPoquesThisTurn >= m_maxLaunchesPerTurn);
+    }
+
+    private void SamePlayerLaunch()
+    {
+        GameplayController.m_instance.Restart();
+        Player currentPlayer = m_turnIndex % 2 == 1 ? m_player1 : m_player2;
+        currentPlayer.ResetLaunch();
+    }
+
     public void StartTurn()
     {
+        LaunchedPoquesThisTurn = 0;
         m_scoredThisTurn = false;
         m_turnIndex++;
-        GameplayController.m_instance.StartTurn();
+        GameplayController.m_instance.Restart();
         Player currentPlayer = m_turnIndex % 2 == 1 ? m_player1 : m_player2;
         if (m_turnIndex % 2 == 1)
         {
@@ -164,6 +189,11 @@ public class GameManager : MonoBehaviour
             m_actionCam.ChangeTurn(transforms);
         }
 
+    }
+
+    public void LaunchPoque(Poque poque)
+    {
+        LaunchedPoquesThisTurn++;
     }
 
     List<Transform> GetActionCamFocusedTransforms(Player player)

@@ -39,6 +39,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ResetLaunch()
+    {
+        m_isTurn = true;
+        m_selectedPoque = null;
+        foreach (var poque in m_poques)
+        {
+            poque.ResetLaunch();
+            poque.GetComponent<CharacterController>().ActivateSelectionFeedback(poque.CanLaunch());
+        }
+    }
+
     public void StartTurn()
     {
         m_isTurn = true;
@@ -66,6 +77,10 @@ public class Player : MonoBehaviour
     {
         if (m_isTurn && poque.GetTeam() == m_team && (m_selectedPoque == null || !m_selectedPoque.GetIsLaunched()))
         {
+            if (!poque.CanLaunch())
+            {
+                return;
+            }
             foreach (var otherPoque in m_poques)
             {
                 otherPoque.GetComponent<CharacterController>().ActivateSelectionFeedback(false);
